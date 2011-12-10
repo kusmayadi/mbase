@@ -11,10 +11,14 @@
 
 class Cobacobi_Template extends Controller_Template {
 
-	public $template = 'general/template/default';
+	public $template = 'template/default';
 	
 	public function before()
 	{
+		
+		$tpl_chooser = new TplChooser;
+		$this->template = $tpl_chooser->template.$this->template;
+		
 		parent::before();
 		
 		// Default title
@@ -22,6 +26,7 @@ class Cobacobi_Template extends Controller_Template {
 		
 		// load asset module
 		$this->asset = new Asset;
+		
 	}
 	
 	/**
@@ -70,6 +75,9 @@ class Cobacobi_Template extends Controller_Template {
  		return $form;
 	}
 	
+	/*
+	 * Setup pagination
+	 */
 	protected function pagination($total_records)
 	{
 		$items_per_page = Common::get_config('pagination.items_per_page');
@@ -86,7 +94,7 @@ class Cobacobi_Template extends Controller_Template {
 	
 	public function after()
 	{
-	
+
 		$this->template->css	= $this->asset->render('css');
 		$this->template->js		= $this->asset->render('js');
 		
