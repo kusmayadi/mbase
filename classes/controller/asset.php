@@ -20,15 +20,24 @@ class Controller_Asset extends Controller {
 			$files = explode(',', $files);
 			$content = '';
 			
+			$tpl_chooser = new TplChooser;
+			
 			foreach($files as $file)
 			{
 				$ext = $this->find_ext($file);
 				$file = substr($file, 0, strpos($file, '.'.$ext));
 				
-				if($asset_file = Kohana::find_file('views', Common::get_config('asset.asset_folder').'/'.$file, $ext))
+				
+				$asset_folder = Common::get_config('asset.asset_folder');
+				
+				if (file_exists(APPPATH.'views/'.$tpl_chooser->template.$asset_folder.'/'.$file.'.'.$ext))
 				{
-					
-					$content .= Kohana::load($asset_file);
+					$asset_folder = $tpl_chooser->template.Common::get_config('asset.asset_folder');
+				}
+				
+				if($asset_file = Kohana::find_file('views', $asset_folder.'/'.$file, $ext))
+				{
+					$content .= file_get_contents($asset_file);
 					$content .= "\n\n";
 				}
 			

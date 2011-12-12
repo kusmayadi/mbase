@@ -16,9 +16,6 @@ class Cobacobi_Template extends Controller_Template {
 	public function before()
 	{
 		
-		$tpl_chooser = new TplChooser;
-		$this->template = $tpl_chooser->template.$this->template;
-		
 		parent::before();
 		
 		// Default title
