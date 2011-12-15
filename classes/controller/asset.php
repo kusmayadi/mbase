@@ -29,10 +29,14 @@ class Controller_Asset extends Controller {
 				
 				
 				$asset_folder = Common::get_config('asset.asset_folder');
-				
+
 				if (file_exists(APPPATH.'views/'.$tpl_chooser->template.$asset_folder.'/'.$file.'.'.$ext))
 				{
 					$asset_folder = $tpl_chooser->template.Common::get_config('asset.asset_folder');
+				}
+				elseif (Common::get_config('template.*') != 'NULL' AND file_exists(APPPATH.'views/'.Common::get_config('template.*').'/'.$asset_folder.'/'.$file.'.'.$ext))
+				{
+					$asset_folder = Common::get_config('template.*').'/'.Common::get_config('asset.asset_folder');
 				}
 				
 				if($asset_file = Kohana::find_file('views', $asset_folder.'/'.$file, $ext))

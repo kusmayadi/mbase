@@ -15,7 +15,7 @@ class Cobacobi_View extends Kohana_View {
 		{
 			$file = Common::get_config('template.*').'/'.$file;
 		}
-		
+
 		parent::__construct($file, $data);
 	}
 
