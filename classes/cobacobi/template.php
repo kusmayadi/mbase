@@ -12,6 +12,8 @@
 class Cobacobi_Template extends Controller_Template {
 
 	public $template = 'template/default';
+	protected $session;
+	protected $messages = array();
 	
 	public function before()
 	{
@@ -23,6 +25,10 @@ class Cobacobi_Template extends Controller_Template {
 		
 		// load asset module
 		$this->asset = new Asset;
+		
+		$this->session = Session::instance();
+		
+		$this->messages = $this->session->get_once('messages');
 		
 	}
 	
@@ -40,6 +46,15 @@ class Cobacobi_Template extends Controller_Template {
 	protected function add_css($cssfile, $params = array())
 	{
 		$this->asset->add_css($cssfile, $params);
+	}
+	
+	protected function add_message($message)
+	{
+		$messages = $this->session->get('messages');
+		
+		$messages[] = $message;
+		
+		$this->session->set('messages', $messages);
 	}
 	
 	/* 
@@ -92,8 +107,9 @@ class Cobacobi_Template extends Controller_Template {
 	public function after()
 	{
 
-		$this->template->css	= $this->asset->render('css');
-		$this->template->js		= $this->asset->render('js');
+		$this->template->css		= $this->asset->render('css');
+		$this->template->js			= $this->asset->render('js');
+		$this->template->messages	= $this->messages;
 		
 		parent::after();
 	}
