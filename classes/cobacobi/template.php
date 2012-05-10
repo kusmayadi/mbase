@@ -87,23 +87,6 @@ class Cobacobi_Template extends Controller_Template {
  		return $form;
 	}
 	
-	/*
-	 * Setup pagination
-	 */
-	protected function pagination($total_records)
-	{
-		$items_per_page = Common::get_config('pagination.items_per_page');
-		$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-	
-		$pagination = Pagination::factory($total_records, $items_per_page, $current_page);
-		
-		$pagination_view = new View_Pagination_Extended;
-		$pagination_view->pagination = $pagination;
-		$pagination_view->request = $this->request;
-		
-		return array('pagination' => $pagination, 'view' => $pagination_view);
-	}
-	
 	public function after()
 	{
 
