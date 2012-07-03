@@ -9,7 +9,7 @@
  * @version 1.0
  **/
 
-class Cobacobi_Template extends Controller_Template {
+class Cobacobi_Controller_Template extends Kohana_Controller_Template {
 
 	public $template = 'template/default';
 	protected $session;
