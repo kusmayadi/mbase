@@ -43,9 +43,31 @@ class Cobacobi_Controller_Template extends Kohana_Controller_Template {
  		$this->asset->add_js($jsfile, $params);
  	}
 	
+	/**
+ 	 * remove all js file from template. 
+ 	 */
+ 	protected function reset_js()
+	{
+		$this->asset->reset_js();
+	}
+	
+	/**
+ 	 * Add cs file to template. 
+ 	 * @uses	cl_asset library
+ 	 * @param	string	cs file stored inside views/media/css
+ 	 * @param	array	key = value formatted for injecting php vars to js file
+ 	 */
 	protected function add_css($cssfile, $params = array())
 	{
 		$this->asset->add_css($cssfile, $params);
+	}
+	
+	/**
+ 	 * remove all css file from template. 
+ 	 */
+ 	protected function reset_css()
+	{
+		$this->asset->reset_css();
 	}
 	
 	protected function add_message($message)

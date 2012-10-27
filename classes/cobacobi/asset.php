@@ -22,9 +22,19 @@ abstract class Cobacobi_Asset {
 		$this->add_asset('css', $filename, $params);
 	}
 	
+	public function reset_css()
+	{
+		$this->reset_asset('css');
+	}
+	
 	public function add_js($filename, $params = array())
 	{
 		$this->add_asset('js', $filename, $params);
+	}
+	
+	public function reset_js()
+	{
+		$this->reset_asset('js');
 	}
 	
 	public function render($type = 'all')
@@ -121,6 +131,22 @@ abstract class Cobacobi_Asset {
 			
 		}
 	
+	}
+	
+	private function reset_asset($type)
+	{
+		switch ($type)
+		{
+			case 'css':
+				$this->css_static  = array();
+				$this->css_dynamic = array();
+			break;
+			
+			case 'js':
+				$this->js_static  = array();
+				$this->js_dynamic = array();
+			break;
+		}
 	}
 	
 }
