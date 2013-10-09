@@ -62,7 +62,7 @@ abstract class Cobacobi_Asset {
 		{
 			if (count($this->js_static))
 			{
-				$content .= html::script('asset?f='.implode(',', $this->js_static));
+				$content .= HTML::script('asset?f='.implode(',', $this->js_static));
 				$content .= "\n\n";
 			}
 			
